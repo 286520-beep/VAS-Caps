@@ -1,0 +1,534 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VAS Caps | Any Color. Any Design.</title>
+<meta name="description" content="Personalize your racket with VAS Caps. Customize colors, logos, and racket details.">
+<style>
+:root {
+  --green: #20a05a;
+  --green-dark: #167a49;
+  --bg: #f5f6f7;
+  --card: #ffffff;
+  --text: #17181b;
+  --muted: #6b7078;
+  --line: #e0e3e7;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+
+nav {
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255,255,255,.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { font-size: 21px; font-weight: 900; letter-spacing: -1px; }
+.logo-mark {
+  display: inline-grid;
+  place-items: center;
+  background: var(--green);
+  color: white;
+  padding: 8px;
+  border-radius: 9px;
+  margin-right: 7px;
+  font-size: 13px;
+}
+.navlinks { display: flex; gap: 25px; font-size: 14px; color: var(--muted); }
+.navlinks a:hover { color: var(--green-dark); }
+
+.hero { text-align: center; padding: 76px 20px 42px; }
+.eyebrow {
+  color: var(--green-dark);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+h1 {
+  font-size: clamp(44px, 7vw, 82px);
+  line-height: .98;
+  letter-spacing: -5px;
+  margin: 18px 0;
+}
+.hero p {
+  max-width: 600px;
+  margin: auto;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.6;
+}
+.actions { margin-top: 27px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  border: 0;
+  border-radius: 30px;
+  padding: 14px 23px;
+  font-weight: 700;
+  display: inline-block;
+}
+.primary { background: var(--green); color: white; }
+.primary:hover { background: var(--green-dark); }
+.secondary { background: #e8ebee; color: var(--text); }
+
+.container { max-width: 1120px; margin: auto; padding: 16px 22px 65px; }
+.video {
+  overflow: hidden;
+  background: #0b0b0c;
+  border-radius: 25px;
+  position: relative;
+}
+.video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+.video-label {
+  position: absolute;
+  z-index: 1;
+  top: 18px;
+  left: 20px;
+  color: white;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 0 1px 8px #000;
+  pointer-events: none;
+}
+
+.builder {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 22px;
+  margin-top: 24px;
+  align-items: start;
+}
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 12px 40px #00000008;
+}
+.panel h2 { font-size: 25px; letter-spacing: -1px; margin: 0; }
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+.step { font-size: 11px; color: var(--muted); font-weight: 800; letter-spacing: 1px; }
+.field { margin-bottom: 23px; }
+.field > label, .field-title { display: block; font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+.hint { color: var(--muted); font-size: 12px; font-weight: 400; }
+select, .text-input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: white;
+  color: var(--text);
+}
+select:focus, .text-input:focus { outline: 2px solid #20a05a55; border-color: var(--green); }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grips, .swatches { display: flex; gap: 9px; flex-wrap: wrap; }
+.pill {
+  padding: 10px 12px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 13px;
+}
+.pill.active { border: 2px solid var(--green); background: #eaf7ef; }
+.swatch {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid white;
+  outline: 1px solid #cfd3d8;
+  padding: 0;
+}
+.swatch.active { outline: 3px solid var(--green); outline-offset: 2px; }
+.qty { display: flex; align-items: center; width: fit-content; border: 1px solid var(--line); border-radius: 11px; overflow: hidden; }
+.qty button { border: 0; width: 42px; height: 42px; background: #eef0f2; font-size: 21px; }
+.qty output { width: 42px; text-align: center; font-weight: 700; }
+.upload {
+  border: 1px dashed #bfc5cb;
+  border-radius: 12px;
+  padding: 15px;
+  background: #fafbfc;
+}
+.upload input { width: 100%; margin-top: 10px; font-size: 12px; }
+.mini-preview {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: var(--bg);
+  border-radius: 15px;
+  margin: 20px 0;
+}
+.mini-preview svg { width: 76px; height: 76px; flex: none; }
+.mini-preview strong { display: block; font-size: 14px; }
+.mini-preview span { display: block; color: var(--muted); font-size: 12px; margin-top: 6px; }
+.line-item { display: flex; justify-content: space-between; gap: 10px; margin: 15px 0; font-size: 14px; color: var(--muted); }
+.line-item b { color: var(--text); }
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: 19px;
+  margin-top: 20px;
+  font-weight: 700;
+}
+.price { font-size: 31px; letter-spacing: -1px; }
+.cart-button { width: 100%; margin-top: 22px; }
+.notice {
+  display: none;
+  padding: 14px;
+  border-radius: 12px;
+  margin-top: 15px;
+  background: #eaf7ef;
+  color: #17653a;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.notice.show { display: block; }
+.fineprint { color: var(--muted); font-size: 11px; line-height: 1.5; text-align: center; }
+
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 24px; }
+.feature { padding: 24px; background: white; border: 1px solid var(--line); border-radius: 19px; }
+.feature .icon { font-size: 24px; }
+.feature h3 { font-size: 16px; margin: 14px 0 8px; }
+.feature p { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 0; }
+footer { text-align: center; padding: 32px 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; line-height: 1.8; }
+footer strong { color: var(--text); }
+
+@media (max-width: 760px) {
+  .navlinks { display: none; }
+  .hero { padding-top: 55px; }
+  h1 { letter-spacing: -2px; }
+  .builder { grid-template-columns: 1fr; }
+  .features { grid-template-columns: 1fr; }
+  .panel { padding: 21px; }
+  .two-col { grid-template-columns: 1fr; }
+  .container { padding: 12px 14px 45px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="#"><span class="logo-mark">VAS</span> VAS CAPS</a>
+  <div class="navlinks">
+    <a href="#customize">Customize</a>
+    <a href="#features">Why VAS</a>
+    <a href="#about">About</a>
+  </div>
+  <span class="hint">Your game. Your gear.</span>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">The custom cap experience</div>
+  <h1>Your racket.<br>Reimagined.</h1>
+  <p>Make your racket unmistakably yours. Customize your VAS Cap with your colors, your design, and a setup made for your game.</p>
+  <div class="actions">
+    <a class="btn primary" href="#customize">Build your cap ↗</a>
+    <a class="btn secondary" href="#features">Explore VAS Caps</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="video" aria-label="VAS Caps product video">
+    <div class="video-label">See the VAS Cap in action</div>
+    <iframe
+      src="https://player.vimeo.com/video/1236597661?autoplay=1&muted=1&loop=1&title=0&byline=0&portrait=0"
+      title="VAS Caps product video"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
+  </section>
+
+  <section class="builder" id="customize">
+    <div class="panel">
+      <div class="panel-heading">
+        <h2>Build your VAS Cap</h2>
+        <span class="step">01 / CUSTOMIZE</span>
+      </div>
+
+      <div class="field">
+        <label for="brand">Racket brand</label>
+        <select id="brand">
+          <option>Wilson</option>
+          <option>Babolat</option>
+          <option>HEAD</option>
+          <option>Yonex</option>
+          <option>Prince</option>
+          <option>Dunlop</option>
+          <option>Other / not sure</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="model">Racket model</label>
+        <select id="model"></select>
+      </div>
+
+      <div class="two-col">
+        <div class="field">
+          <label>Grip size</label>
+          <div class="grips" id="grips">
+            <button class="pill" data-grip="4 0/8">4 0/8</button>
+            <button class="pill active" data-grip="4 1/8">4 1/8</button>
+            <button class="pill" data-grip="4 1/4">4 1/4</button>
+            <button class="pill" data-grip="4 3/8">4 3/8</button>
+            <button class="pill" data-grip="4 1/2">4 1/2</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Quantity</label>
+          <div class="qty">
+            <button id="minus" aria-label="Decrease quantity">−</button>
+            <output id="quantity">1</output>
+            <button id="plus" aria-label="Increase quantity">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-title">Main color</div>
+        <div class="swatches" id="mainColors">
+          <button class="swatch active" style="background:#20a05a" data-color="#20a05a" aria-label="Green"></button>
+          <button class="swatch" style="background:#111318" data-color="#111318" aria-label="Black"></button>
+          <button class="swatch" style="background:#f4f4f4" data-color="#f4f4f4" aria-label="White"></button>
+          <button class="swatch" style="background:#2764db" data-color="#2764db" aria-label="Blue"></button>
+          <button class="swatch" style="background:#df3c4e" data-color="#df3c4e" aria-label="Red"></button>
+          <button class="swatch" style="background:#8c52d9" data-color="#8c52d9" aria-label="Purple"></button>
+          <button class="swatch" style="background:#f2bd32" data-color="#f2bd32" aria-label="Yellow"></button>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-title">Logo / accent color</div>
+        <div class="swatches" id="accentColors">
+          <button class="swatch active" style="background:#ffffff" data-color="#ffffff" aria-label="White"></button>
+          <button class="swatch" style="background:#111318" data-color="#111318" aria-label="Black"></button>
+          <button class="swatch" style="background:#f2bd32" data-color="#f2bd32" aria-label="Yellow"></button>
+          <button class="swatch" style="background:#ff8c42" data-color="#ff8c42" aria-label="Orange"></button>
+          <button class="swatch" style="background:#20a05a" data-color="#20a05a" aria-label="Green"></button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="logoText">Logo or text</label>
+        <input class="text-input" id="logoText" maxlength="12" value="VAS" placeholder="Your initials or team name">
+      </div>
+
+      <div class="field">
+        <label for="logoFile">Upload your design <span class="hint">Optional</span></label>
+        <div class="upload">
+          PNG, JPG, or SVG
+          <input id="logoFile" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml">
+          <div class="hint" id="fileName">Image selection is a visual mock-up only.</div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="panel">
+      <div class="panel-heading">
+        <h2>Your creation</h2>
+        <span class="step">LIVE PREVIEW</span>
+      </div>
+
+      <div class="mini-preview">
+        <svg viewBox="0 0 160 160" aria-label="Custom cap preview" role="img">
+          <path id="capShape" d="M80 10 C115 10 145 37 145 73 L145 90 C145 123 116 148 80 150 C44 148 15 123 15 90 L15 73 C15 37 45 10 80 10Z" fill="#20a05a"/>
+          <circle cx="80" cy="80" r="37" fill="#ffffff" fill-opacity=".13" stroke="#ffffff" stroke-opacity=".5"/>
+          <text id="capLogo" x="80" y="86" text-anchor="middle" font-size="18" font-weight="900" fill="#ffffff">VAS</text>
+        </svg>
+        <div>
+          <strong id="summaryName">Wilson Pro Staff</strong>
+          <span id="summaryDetail">Grip 4 1/8 · Green / White</span>
+          <span>Personalized color concept</span>
+        </div>
+      </div>
+
+      <div class="line-item"><span>Custom VAS Cap</span><b>$14.99 each*</b></div>
+      <div class="line-item"><span>Quantity</span><b id="summaryQuantity">1</b></div>
+      <div class="line-item"><span>Racket</span><b id="summaryFit">Wilson · Pro Staff</b></div>
+
+      <div class="total">
+        <span>Estimated subtotal</span>
+        <span class="price" id="total">$14.99</span>
+      </div>
+
+      <button class="btn primary cart-button" id="addCart">Add to mock cart →</button>
+      <div class="notice" id="notice" role="status">
+        Added to your mock cart! This is a demo. No order or payment was placed.
+      </div>
+      <p class="fineprint">*Example price for this concept. Fit compatibility, production pricing, shipping, and checkout are not yet connected.</p>
+    </aside>
+  </section>
+
+  <section class="features" id="features">
+    <article class="feature">
+      <div class="icon">🎨</div>
+      <h3>Your colors. Your design.</h3>
+      <p>Choose a color combination and personalize your cap with initials, a logo, or your team identity.</p>
+    </article>
+    <article class="feature">
+      <div class="icon">🎾</div>
+      <h3>Made for your setup</h3>
+      <p>Choose your racket brand, model, and grip size to describe the fit you need.</p>
+    </article>
+    <article class="feature">
+      <div class="icon">⚖️</div>
+      <h3>Screw-in adjustable weight</h3>
+      <p>The two-part VAS Cap design lets you unscrew the lower piece to access the weight and customize racket balance.</p>
+    </article>
+  </section>
+</main>
+
+<footer id="about">
+  <strong>VAS CAPS</strong> · Any Color. Any Design.<br>
+  Website concept — not a live store.
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+
+let quantity = 1;
+let mainColor = "#20a05a";
+let accentColor = "#ffffff";
+let grip = "4 1/8";
+
+const models = {
+  "Wilson": ["Pro Staff", "Blade", "Clash", "Ultra", "Shift"],
+  "Babolat": ["Pure Aero", "Pure Drive", "Pure Strike", "Evo"],
+  "HEAD": ["Speed", "Radical", "Gravity", "Boom", "Extreme"],
+  "Yonex": ["EZONE", "VCORE", "PERCEPT", "ASTREL"],
+  "Prince": ["Phantom", "Textreme Tour", "Warrior"],
+  "Dunlop": ["FX", "CX", "SX"],
+  "Other / not sure": ["Other / not sure"]
+};
+
+const colorNames = {
+  "#20a05a": "Green",
+  "#111318": "Black",
+  "#f4f4f4": "White",
+  "#2764db": "Blue",
+  "#df3c4e": "Red",
+  "#8c52d9": "Purple",
+  "#f2bd32": "Yellow",
+  "#ffffff": "White",
+  "#ff8c42": "Orange"
+};
+
+function updateModels() {
+  const brand = $("brand").value;
+  const modelSelect = $("model");
+  modelSelect.replaceChildren();
+
+  models[brand].forEach(name => {
+    const option = document.createElement("option");
+    option.value = name;
+    option.textContent = name;
+    modelSelect.appendChild(option);
+  });
+
+  updatePreview();
+}
+
+function updatePreview() {
+  const brand = $("brand").value;
+  const model = $("model").value;
+  const text = $("logoText").value.trim() || "VAS";
+
+  $("capShape").setAttribute("fill", mainColor);
+  $("capLogo").setAttribute("fill", accentColor);
+  $("capLogo").textContent = text.slice(0, 12);
+
+  $("summaryName").textContent = brand + " " + model;
+  $("summaryDetail").textContent =
+    "Grip " + grip + " · " +
+    colorNames[mainColor] + " / " + colorNames[accentColor];
+
+  $("summaryQuantity").textContent = quantity;
+  $("summaryFit").textContent = brand + " · " + model;
+  $("quantity").textContent = quantity;
+  $("total").textContent = "$" + (14.99 * quantity).toFixed(2);
+}
+
+function connectSwatches(containerId, setColor) {
+  document.querySelectorAll("#" + containerId + " .swatch").forEach(button => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll("#" + containerId + " .swatch")
+        .forEach(item => item.classList.remove("active"));
+
+      button.classList.add("active");
+      setColor(button.dataset.color);
+      updatePreview();
+    });
+  });
+}
+
+$("brand").addEventListener("change", updateModels);
+$("model").addEventListener("change", updatePreview);
+$("logoText").addEventListener("input", updatePreview);
+
+$("plus").addEventListener("click", () => {
+  quantity = Math.min(99, quantity + 1);
+  updatePreview();
+});
+
+$("minus").addEventListener("click", () => {
+  quantity = Math.max(1, quantity - 1);
+  updatePreview();
+});
+
+document.querySelectorAll("[data-grip]").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll("[data-grip]")
+      .forEach(item => item.classList.remove("active"));
+
+    button.classList.add("active");
+    grip = button.dataset.grip;
+    updatePreview();
+  });
+});
+
+connectSwatches("mainColors", color => mainColor = color);
+connectSwatches("accentColors", color => accentColor = color);
+
+$("logoFile").addEventListener("change", event => {
+  const file = event.target.files[0];
+  $("fileName").textContent = file
+    ? "Selected: " + file.name + " (not uploaded)"
+    : "Image selection is a visual mock-up only.";
+});
+
+$("addCart").addEventListener("click", () => {
+  $("notice").classList.add("show");
+});
+
+updateModels();
+</script>
+</body>
+</html>
